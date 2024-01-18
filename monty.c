@@ -1,10 +1,14 @@
 #include "monty.h"
 #include <stdlib.h>
-
-char global_value[100];
-
+struct MontyGlobals MontyGlobals;
+/**
+ * push - entry point
+ * @stack: stack
+ * @line_number: counter
+ */
 void push(stack_t **stack, unsigned int line_number)
 {
+	char *global_value = MontyGlobals.global_value;
 	stack_t *new_node;
 	char *endptr;  /* For error checking in strtol */
 
@@ -33,11 +37,17 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 
 	*stack = new_node;
-}
 
+}
+/**
+ * pall - entry point
+ * @stack: stack
+ * @line_number: counter
+ */
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;  /* Move declaration to the beginning */
+
 	current = *stack;
 
 	(void)line_number;  /* Suppress unused parameter warning */
