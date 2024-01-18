@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-extern char global_value[100];  /* Declare the extern variable */
-
+extern struct MontyGlobals {
+    char global_value[100];
+} MontyGlobals;
 typedef struct stack_s
 {
 	int n;
