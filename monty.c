@@ -73,7 +73,10 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	printf("%d\n", (*stack)->n);
 }
-
+/**
+ * free_stack - entry point
+ * @stack: stack
+ */
 void free_stack(stack_t **stack)
 {
 	stack_t *current = *stack;
@@ -87,4 +90,27 @@ void free_stack(stack_t **stack)
 	}
 
 	*stack = NULL;
+}
+/**
+ * pop - entry point
+ * @stack: stack
+ * @line_number: counter
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+
+	*stack = (*stack)->next;
+	if (*stack != NULL)
+	{
+		(*stack)->prev = NULL;
+	}
+
+	free(temp);
 }
