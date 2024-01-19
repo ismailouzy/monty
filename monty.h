@@ -5,7 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 extern struct MontyGlobals {
-    char global_value[100];
+    char global_value[1024];
 } MontyGlobals;
 typedef struct stack_s
 {
