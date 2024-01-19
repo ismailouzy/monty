@@ -34,7 +34,13 @@ int main(int argc, char *argv[])
 	while (fscanf(file, "%s", opcode) != EOF)
 	{
 		line_number++;
-
+		if (opcode[0] == '#')
+		{
+			char ar;
+			while ((ar = fgetc(file)) != EOF && ar != '\n')
+				;
+			continue;
+		}
 		for (i = 0; i < sizeof(instructions) / sizeof(instructions[0]); i++)
 		{
 			if (strcmp(opcode, instructions[i].opcode) == 0)
