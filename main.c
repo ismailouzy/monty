@@ -13,7 +13,8 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 	instruction_t instructions[] = {{"push", push}, {"pall", pall}, 
 		{"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {"sub", sub}, {"div", div_op}, {"mul", mul}};
+		{"nop", nop}, {"sub", sub}, {"div", div_op}, {"mul", mul},
+		{"mod", mod}};
 	char opcode[100], *fmt = "L%d: %s %s\n";
 	unsigned int line_number = 0, i;
 
