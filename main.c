@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	FILE *file;
 	char *global_value = MontyGlobals.global_value;
 	stack_t *stack = NULL;
-	instruction_t instructions[] = {{"push", push}, {"pall", pall}};
+	instruction_t instructions[] = {{"push", push}, {"pall", pall}, {"pint", pint}};
 	char opcode[100], *fmt = "L%d: %s %s\n";
 	unsigned int line_number = 0, i;
 
