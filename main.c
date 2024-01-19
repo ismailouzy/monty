@@ -1,4 +1,5 @@
 #include "monty.h"
+
 /**
  * main - entry point
  * @argc: arg count
@@ -17,34 +18,50 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE); }
+		return (EXIT_FAILURE);
+	}
+
 	file = fopen(argv[1], "r");
 	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE); }
+		return (EXIT_FAILURE);
+	}
+
 	while (fscanf(file, "%s", opcode) != EOF)
 	{
 		line_number++;
+
 		for (i = 0; i < sizeof(instructions) / sizeof(instructions[0]); i++)
 		{
 			if (strcmp(opcode, instructions[i].opcode) == 0)
 			{
 				if (strcmp(instructions[i].opcode, "push") == 0 &&
-						fscanf(file, "%s", global_value) != 1) {
+						fscanf(file, "%s", global_value) != 1)
+				{
 					fprintf(stderr, fmt, line_number, "usage:", "push integer");
-					return (EXIT_FAILURE); }
+					fclose(file);
+					free_stack(&stack);
+					return (EXIT_FAILURE);
+				}
+
 				instructions[i].f(&stack, line_number);
-				break; }}
+				break;
+			}
+		}
+
 		if (i == sizeof(instructions) / sizeof(instructions[0]))
 		{
 			fprintf(stderr, fmt, line_number, "unknown instruction", opcode);
-			return (EXIT_FAILURE); }}
-	fclose(file);
-	while (stack)
-	{
-		stack_t *temp = stack;
+			fclose(file);
+			free_stack(&stack);
+			return (EXIT_FAILURE);
+		}
+	}
 
-		stack = stack->next;
-		free(temp); }
-	return (0); }
+	fclose(file);
+	free_stack(&stack);
+
+	return (0);
+}
+
